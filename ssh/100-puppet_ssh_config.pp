@@ -1,28 +1,20 @@
 # This Puppet script configures the SSH client to use a specific private key and disables password authentication.
 
-file { '/home/ubuntu/.ssh':
-  ensure => directory,
-  mode   => '0700',
-  owner  => 'ubuntu',
-  group  => 'ubuntu',
+file { 'Add Host block':
+  path   => '/etc/ssh/ssh_config',
+  line   => 'Host *',
+  match  => '^Host\s+',
+  before => 'File_line[Set IdentityFile]',
 }
 
-file { '/home/ubuntu/.ssh/config':
-  ensure => present,
-  mode   => '0644',
-  owner  => 'ubuntu',
-  group  => 'ubuntu',
-}
-
-file_line { 'Declare identity file':
-  path  => '/home/ubuntu/.ssh/config',
+file { 'Set IdentityFile':
+  path  => '/etc/ssh/ssh_config',
   line  => '    IdentityFile ~/.ssh/school',
-  match => '^\s*PasswordAuthentication',
+  match => '^\s*IdentityFile',
 }
 
-file_line {'Add host block':
-  path  => '/home/ubuntu/.ssh/config',
-  line  => 'Host *',
-  match => '^Host\s+',
-  before => "File_line[Declare identity file]',
+file_line { 'Disable PasswordAuthentication':
+  path  => '/etc/ssh/ssh_config',
+  line  => '    PasswordAuthentication no',
+  match => '^\s*PasswordAuthentication',
 }
