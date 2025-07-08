@@ -1,3 +1,5 @@
+# This Puppet script configures the SSH client to use a specific private key and disables password authentication.
+
 file { '/home/ubuntu/.ssh':
   ensure => directory,
   mode   => '0700',
