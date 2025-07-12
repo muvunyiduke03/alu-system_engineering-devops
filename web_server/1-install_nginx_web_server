@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Exit immediately
+set -e
 # Update package index
 apt-get update -y
 
