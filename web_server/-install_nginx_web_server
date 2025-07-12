@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Update package index
+apt-get update -y
+
+# Install nginx if not already installed
+apt-get install nginx -y
+
+# Create a custome index.html with the content
+echo "Holberton School for the win!" > /var/www/html/index.html
+
+# Ensure nginx is running
+service nginx start || service nginx restart
