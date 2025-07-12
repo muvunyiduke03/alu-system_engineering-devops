@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check if exactly 4 arguments are provided
 if ["$#" -ne 4]; then
